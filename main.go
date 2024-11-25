@@ -7,6 +7,10 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
+const (
+	TPS = 60
+)
+
 type Game struct {
 	updateCount int
 	drawCount   int
@@ -53,6 +57,7 @@ func main() {
 
 	ebiten.SetWindowSize(640, 480)
 	ebiten.SetWindowTitle("Show FPS and TPS")
+	ebiten.SetTPS(TPS)
 	if err := ebiten.RunGame(game); err != nil {
 		log.Fatal(err)
 	}
