@@ -1,31 +1,18 @@
 # Ebitengine FPS and TPS
 
-Show FPS and TPS in Ebitengine.
+Show FPS and TPS with Update()/Draw() in Ebitengine.
 
 Output example:
 ```log
-2024/11/25 14:16:17 TPS: 59.92, FPS: 59.92
-2024/11/25 14:16:18 TPS: 60.12, FPS: 60.12
-2024/11/25 14:16:19 TPS: 59.96, FPS: 58.96
-2024/11/25 14:16:20 TPS: 60.00, FPS: 60.00
-2024/11/25 14:16:21 TPS: 60.00, FPS: 60.00
-2024/11/25 14:16:22 TPS: 60.00, FPS: 60.00
-2024/11/25 14:16:23 TPS: 60.03, FPS: 60.03
-2024/11/25 14:16:24 TPS: 59.96, FPS: 59.96
-2024/11/25 14:16:25 TPS: 60.00, FPS: 60.00
-2024/11/25 14:16:26 TPS: 60.01, FPS: 60.01
-2024/11/25 14:16:26 Update() was called in this 10 sec: 600 times
-2024/11/25 14:16:26 Draw() was called in this 10 sec: 599 times
-2024/11/25 14:16:27 TPS: 60.01, FPS: 60.01
-2024/11/25 14:16:28 TPS: 60.00, FPS: 60.00
-2024/11/25 14:16:29 TPS: 59.98, FPS: 59.98
-2024/11/25 14:16:30 TPS: 60.01, FPS: 60.01
-2024/11/25 14:16:31 TPS: 60.00, FPS: 60.00
-2024/11/25 14:16:32 TPS: 59.97, FPS: 59.97
-2024/11/25 14:16:33 TPS: 60.04, FPS: 60.04
-2024/11/25 14:16:34 TPS: 59.98, FPS: 59.98
-2024/11/25 14:16:35 TPS: 60.00, FPS: 60.00
-2024/11/25 14:16:36 TPS: 60.00, FPS: 60.00
-2024/11/25 14:16:36 Update() was called in this 10 sec: 601 times
-2024/11/25 14:16:36 Draw() was called in this 10 sec: 601 times
+2024/11/25 14:41:54 TPS: 59.92, FPS: 59.92
+2024/11/25 14:41:54 Update() was called in this sec: 60 times
+2024/11/25 14:41:54 Draw() was called in this sec: 60 times
+
+2024/11/25 14:41:55 TPS: 60.09, FPS: 60.09
+2024/11/25 14:41:55 Update() was called in this sec: 61 times
+2024/11/25 14:41:55 Draw() was called in this sec: 61 times
+
+2024/11/25 14:41:56 TPS: 59.98, FPS: 59.98
+2024/11/25 14:41:56 Update() was called in this sec: 61 times
+2024/11/25 14:41:56 Draw() was called in this sec: 61 times
 ```
