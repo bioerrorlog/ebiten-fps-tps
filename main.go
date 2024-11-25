@@ -8,44 +8,37 @@ import (
 )
 
 type Game struct {
-	startTime     time.Time
-	lastDebugTime time.Time
-	updateCount   int
-	drawCount     int
-	updateLogged  bool
-	drawLogged    bool
+	updateCount int
+	drawCount   int
+	per1Sec     time.Time
+	per10Sec    time.Time
 }
 
 func (g *Game) Update() error {
 	now := time.Now()
+	g.updateCount++
 
-	// 最初の10秒間、Update()の呼び出し回数をカウント
-	if now.Sub(g.startTime) <= 10*time.Second {
-		g.updateCount++
-	} else if !g.updateLogged {
-		log.Printf("10秒間でUpdate()が呼び出された回数: %d", g.updateCount)
-		g.updateLogged = true
+	// Debug print TPS and FPS per sec
+	if now.Sub(g.per1Sec) >= time.Second {
+		log.Printf("TPS: %.2f, FPS: %.2f", ebiten.ActualTPS(), ebiten.ActualFPS())
+		g.per1Sec = now
 	}
 
-	// 1秒ごとにTPSとFPSをデバッグプリント
-	if now.Sub(g.lastDebugTime) >= time.Second {
-		g.lastDebugTime = now
-		log.Printf("TPS: %.2f, FPS: %.2f", ebiten.ActualTPS(), ebiten.ActualFPS())
+	// Debug print Update() and Draw() called count in this 10 sec
+	if now.Sub(g.per10Sec) >= 10*time.Second {
+		log.Printf("Update() was called in this 10 sec: %d times", g.updateCount)
+		log.Printf("Draw() was called in this 10 sec: %d times", g.drawCount)
+
+		g.updateCount = 0
+		g.drawCount = 0
+		g.per10Sec = now
 	}
 
 	return nil
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	now := time.Now()
-
-	// 最初の10秒間、Draw()の呼び出し回数をカウント
-	if now.Sub(g.startTime) <= 10*time.Second {
-		g.drawCount++
-	} else if !g.drawLogged {
-		log.Printf("10秒間でDraw()が呼び出された回数: %d", g.drawCount)
-		g.drawLogged = true
-	}
+	g.drawCount++
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
@@ -54,12 +47,12 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
 
 func main() {
 	game := &Game{
-		startTime:     time.Now(),
-		lastDebugTime: time.Now(),
+		per1Sec:  time.Now(),
+		per10Sec: time.Now(),
 	}
 
 	ebiten.SetWindowSize(640, 480)
-	ebiten.SetWindowTitle("FPSとTPSのデバッグプリント")
+	ebiten.SetWindowTitle("Show FPS and TPS")
 	if err := ebiten.RunGame(game); err != nil {
 		log.Fatal(err)
 	}
